@@ -7,7 +7,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Home</a></span> <span>Cart</span></p>
-            <h1 class="mb-0 bread">My Cart</h1>
+            <h1 class="mb-0 bread">My Orders</h1>
           </div>
         </div>
       </div>
@@ -15,32 +15,30 @@
 
     <section class="ftco-section ftco-cart">
 			<div class="container">
-				{% if cart_items %}
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>&nbsp;</th>
-						        <th>Product</th>
-						        <th>name</th>
-						        <th>Price</th>
+						        <th>OrderId</th>
+						        <th>Order Details</th>						        
+						        <th>Amount</th>
+						        <th>Address</th>						        
+						        <th>Status</th>
 						      </tr>
 						    </thead>
 						    <tbody>
-								{% for item in cart_items %}
+								{% for order in orders %}
 						      <tr class="text-center" style="color:black">
-						        <td class="product-remove"><a href="{% url 'remove_from_cart' %}?id={{item.id}}"><span class="ion-ios-close"></span></a></td>
+						       
+						       <td class="product-name"><b>{{ order.id }}</b></td>
+						       <td class="price">{{ order.details }}</td>
+						       <td class="price">{{ order.amount }} INR</td>						        
+						       <td class="price">{{ order.delivery_address }}</td>
 
-						        <td class="image-prod"><div class="img" style="background-image:url('{{item.product.photo.url }}')"></div></td>
-
-						        <td class="product-name">
-						        	<b>{{ item.product.name }}</b>
-						        	<p>{{ item.product.details }}</p>
-						        </td>
-
-						        <td class="price">{{ item.product.price }} INR</td>
+						       <td class="price">{{ order.status }}</td>
+						        						        	
 						      <!-- </tr> -->
 							  {% endfor %}
 						    </tbody>
@@ -48,36 +46,28 @@
 					  </div>
     			</div>
     		</div>
-    		{% else %}
-    			Your cart is empty 🥺,  <a href="/shop">Shop now</a>
-    		{% endif %}
-    		{% if cart_items %}
-    		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Cart Totals</h3>
-    					<p class="d-flex">
-    						<span>Subtotal</span>
-    						<span>INR {{total}}</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Delivery</span>
-    						<span>INR 0.00</span>
-    					</p>
-    					<hr>
-    					<p class="d-flex total-price">
-    						<span>Total</span>
-    						<span>INR {{total}} </span>
-    					</p>
-    				</div>
-    				<p><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
-    		</div>
-    		{% endif %}
+
 			</div>
 		</section>
 
-
+		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+      <div class="container py-4">
+        <div class="row d-flex justify-content-center py-5">
+          <div class="col-md-6">
+          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
+          	<span>Get e-mail updates about our latest shops and special offers</span>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <form action="#" class="subscribe-form">
+              <div class="form-group d-flex">
+                <input type="text" class="form-control" placeholder="Enter email address">
+                <input type="submit" value="Subscribe" class="submit px-3">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
     <script>
   		$(document).ready(function(){
 
